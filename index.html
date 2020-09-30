@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+        
+        let playerScore = 0;
+        let computerScore = 0;
+        // create a function called playRound 
+        // to play a round of Rock, Papers, Scissors
+        // the inputs will be computerSelection and a playerSelection
+
+
+        // Create game() to have multiple rounds
+        // Keep track of score
+        // Report a winner at the end
+        // Use prompt() to get input from the user
+        function game() {
+
+            function playRound(playerSelection, computerSelection) {
+                // need to define what beats what using the game choice array?
+                // need to make playerSelection case insensitive
+                playerSelection = prompt("Please enter your decision").toLocaleLowerCase();
+
+                // function will be computerPlay() to get a random result of RPS
+                // for the computer
+                function computerPlay() {
+                    let gameChoice = ['rock', 'paper', 'scissors'];
+                    // it randomly selects between Rock, Paper, or Scissors
+                    var randomNumber = Math.floor(Math.random() * gameChoice.length);
+                    // it returns the selection to the variable computerSelection
+                    let computerSelection = gameChoice[randomNumber];
+                    // console.log(computerSelection);
+                    return computerSelection;
+                }
+
+                computerSelection = computerPlay();
+
+
+                console.log(playerSelection, computerSelection);
+                if ((playerSelection == "rock" && computerSelection == "scissors")
+                    || (playerSelection == "paper" && computerSelection == "rock")
+                    || (playerSelection == "scissors" && computerSelection == "paper")) {
+                    playerScore++;
+                    console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+                    return "You Win!";
+                } else {
+                    computerScore++;
+                    console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+                    return "You Lose :(";
+                }
+
+
+            }
+
+            for (i = 0; i < 5; i++){
+                playRound();
+            }
+            let winner;
+            if (playerScore > computerScore){
+                winner = 'Player';
+            } else if (computerScore > playerScore) {
+                winner = 'Computer';
+            }
+            console.log('Winner is: ' + winner);
+
+
+        }
+
+        game();
+
+
+
+
+
+    </script>
+</body>
+
+</html>
