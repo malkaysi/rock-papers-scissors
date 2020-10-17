@@ -12,6 +12,13 @@
         Welcome to Rock, Papers, Scissors
     </h1>
 
+    <h2>Scoreboard</h2>
+    <div id='Score'>
+        <label id="plrScore">0</label>
+        <label id="cpuScore">0</label>
+    </div>
+
+
     <div class="keys">
         <div data-key="65" class="key">
             <kbd>A</kbd>
@@ -26,10 +33,6 @@
             <span class="selection">Scissors</span>
         </div>
     </div>
-
-    
-
-
 
     <script>
 
@@ -46,18 +49,18 @@
             return computerSelection;
         }
 
-        function playRound(e){
+        function playRound(e) {
 
             const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
             // We want the keycode to output the playerSelection
 
             let playerSelection = '';
 
-            if(e.keyCode == 65){
+            if (e.keyCode == 65) {
                 playerSelection = 'rock'
-            } else if(e.keyCode == 83){
+            } else if (e.keyCode == 83) {
                 playerSelection = 'paper'
-            } else if(e.keyCode == 68){
+            } else if (e.keyCode == 68) {
                 playerSelection = 'scissors'
             } else {
                 return;
@@ -71,13 +74,21 @@
                 || (playerSelection == "paper" && computerSelection == "rock")
                 || (playerSelection == "scissors" && computerSelection == "paper")) {
                 playerScore++;
-                console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+
+                let plrScore = document.getElementById('plrScore');
+                plrScore.innerHTML = playerScore;
+
+
                 return "You Win!";
             } else {
                 computerScore++;
-                console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+
+                let cpuScore = document.getElementById('cpuScore');
+                cpuScore.innerHTML = computerScore;
                 return "You Lose :(";
             }
+
+
 
         }
 
