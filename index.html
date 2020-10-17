@@ -4,78 +4,84 @@
 <head>
     <title>Page Title</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <h1>
+        Welcome to Rock, Papers, Scissors
+    </h1>
+
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="selection">Rock</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="selection">Paper</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="selection">Scissors</span>
+        </div>
+    </div>
+
+    
+
+
+
     <script>
-        
+
         let playerScore = 0;
         let computerScore = 0;
-        // create a function called playRound 
-        // to play a round of Rock, Papers, Scissors
-        // the inputs will be computerSelection and a playerSelection
 
+        function computerPlay() {
+            let gameChoice = ['rock', 'paper', 'scissors'];
+            // it randomly selects between Rock, Paper, or Scissors
+            var randomNumber = Math.floor(Math.random() * gameChoice.length);
+            // it returns the selection to the variable computerSelection
+            let computerSelection = gameChoice[randomNumber];
+            // console.log(computerSelection);
+            return computerSelection;
+        }
 
-        // Create game() to have multiple rounds
-        // Keep track of score
-        // Report a winner at the end
-        // Use prompt() to get input from the user
-        function game() {
+        function playRound(e){
 
-            function playRound(playerSelection, computerSelection) {
-                // need to define what beats what using the game choice array?
-                // need to make playerSelection case insensitive
-                playerSelection = prompt("Please enter your decision").toLocaleLowerCase();
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            // We want the keycode to output the playerSelection
 
-                // function will be computerPlay() to get a random result of RPS
-                // for the computer
-                function computerPlay() {
-                    let gameChoice = ['rock', 'paper', 'scissors'];
-                    // it randomly selects between Rock, Paper, or Scissors
-                    var randomNumber = Math.floor(Math.random() * gameChoice.length);
-                    // it returns the selection to the variable computerSelection
-                    let computerSelection = gameChoice[randomNumber];
-                    // console.log(computerSelection);
-                    return computerSelection;
-                }
+            let playerSelection = '';
 
-                computerSelection = computerPlay();
-
-
-                console.log(playerSelection, computerSelection);
-                if ((playerSelection == "rock" && computerSelection == "scissors")
-                    || (playerSelection == "paper" && computerSelection == "rock")
-                    || (playerSelection == "scissors" && computerSelection == "paper")) {
-                    playerScore++;
-                    console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
-                    return "You Win!";
-                } else {
-                    computerScore++;
-                    console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
-                    return "You Lose :(";
-                }
-
-
+            if(e.keyCode = '65'){
+                playerSelection = 'rock'
+            } else if(e.keyCode = '83'){
+                playerSelection = 'paper'
+            } else if(e.keyCode = '68'){
+                playerSelection = 'scissors'
+            } else {
+                return;
             }
 
-            for (i = 0; i < 5; i++){
-                playRound();
-            }
-            let winner;
-            if (playerScore > computerScore){
-                winner = 'Player';
-            } else if (computerScore > playerScore) {
-                winner = 'Computer';
-            }
-            console.log('Winner is: ' + winner);
+            computerSelection = computerPlay();
 
+            console.log('Player: ' + playerSelection + ', Computer: ' + computerSelection);
+
+            if ((playerSelection == "rock" && computerSelection == "scissors")
+                || (playerSelection == "paper" && computerSelection == "rock")
+                || (playerSelection == "scissors" && computerSelection == "paper")) {
+                playerScore++;
+                console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+                return "You Win!";
+            } else {
+                computerScore++;
+                console.log('Player Score: ' + playerScore + ' Computer Score: ' + computerScore);
+                return "You Lose :(";
+            }
 
         }
 
-        game();
-
-
-
+        window.addEventListener('keydown', playRound)
 
 
     </script>
