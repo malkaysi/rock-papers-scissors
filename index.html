@@ -38,6 +38,7 @@
 
         let playerScore = 0;
         let computerScore = 0;
+        let totalScore = 0;
 
         function computerPlay() {
             let gameChoice = ['rock', 'paper', 'scissors'];
@@ -69,7 +70,9 @@
             computerSelection = computerPlay();
 
             console.log('Player: ' + playerSelection + ', Computer: ' + computerSelection);
+                      
 
+            
             if ((playerSelection == "rock" && computerSelection == "scissors")
                 || (playerSelection == "paper" && computerSelection == "rock")
                 || (playerSelection == "scissors" && computerSelection == "paper")) {
@@ -78,21 +81,35 @@
                 let plrScore = document.getElementById('plrScore');
                 plrScore.innerHTML = playerScore;
 
-
-                return "You Win!";
             } else {
                 computerScore++;
 
                 let cpuScore = document.getElementById('cpuScore');
                 cpuScore.innerHTML = computerScore;
-                return "You Lose :(";
+
             }
+
+            totalScore = playerScore + computerScore;
+
+            console.log('Player score: ' + playerScore + ' Computer score: ' + computerScore)
+
+            if(totalScore == 5 && playerScore > computerScore){
+                alert('Player wins');
+            } else if(totalScore == 5 && computerScore > playerScore){
+                alert('Computer wins :(');
+            }
+
+            
 
 
 
         }
 
-        window.addEventListener('keydown', playRound)
+
+            window.addEventListener('keydown', playRound)     
+        
+
+        
 
 
     </script>
